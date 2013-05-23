@@ -1,5 +1,6 @@
 package com.archilog.jygo.rest;
 
+import static com.archilog.jygo.JygoServer.launchCommand;
 import javax.ejb.Stateless;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
@@ -13,6 +14,6 @@ public class JygoResource {
     @Path("{cmd}")
     @Produces("text/html")
     public String getResponse(@PathParam("cmd") String cmd) {
-        return "<html><body><h1>Command : "+cmd+"</h1></body></html>";
+        return launchCommand(cmd);
     }
 }

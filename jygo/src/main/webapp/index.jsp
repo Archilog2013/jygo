@@ -8,6 +8,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Jeu de GO</h1>
+        
+        <form id="jygo" action="/jygo/webresources/go/" method="GET">
+            <input type="text" id="cmd" name="cmd"/>
+            <input type="submit"/>
+        </form>
     </body>
 </html>
