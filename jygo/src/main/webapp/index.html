@@ -415,7 +415,13 @@
         </script>
         <script>
             $(document).ready(function() {
-                $( ".pions" ).draggable({ snap: "#plateau tbody tr td" });
+                $('.has-form').click(function(){
+                    $.post('jygo/webressources/go/login',function(data){
+                        alert(data);
+                    })
+                })
+                $(".pions").draggable({ containment: "#plateau",accept: "#plateau tbody tr td" });
+                $("#plateau tbody tr td").dropable({ accept: ".pions" });
             });
         </script>
 
