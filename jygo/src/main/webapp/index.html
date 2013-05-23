@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<!--[if IE 8]> 				 <html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>Jygo</title>
+
+
+        <link rel="stylesheet" href="css/foundation.css" />
+        <link rel="stylesheet" href="css/main.css" />
+        <link rel="stylesheet" href="css/jquery-ui-1.10.3.custom.min.css" />
+        <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.11.0.css"/>
+        <script src="js/vendor/custom.modernizr.js"></script>
+
+    </head>
+    <body>
+        <nav class="top-bar" style="">
+            <ul class="title-area">
+                <!-- Title Area -->
+                <li class="name">
+                    <h1><a href="/">JyGo</a></h1>
+                </li>
+            </ul>
+
+
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+                    <li class="divider"></li>
+                    <li><input id="login" placeholder="Login"/></li>
+                    <li class="divider"></li>
+                    <li><input id="psw" placeholder="Mot de passe"/></li>
+                    <li class="divider"></li>
+                    <li class="has-form">
+                        <a class="button" href="#">Go</a>
+                    </li>
+                </ul>
+            </section></nav>
+        <div class="row">
+            <div class="large-12 columns">
+                <h2>Welcome to JyGo</h2>
+                <p>This is version 0.0.0.1</p>
+                <hr />
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="large-12 columns">
+                <h3></h3>
+
+                <!-- Grid Example -->
+                <div class="row">
+                    <div class="large-12 columns">
+                        <div class="panel">
+                            <table id="grille">
+                                <thead> 
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table id="plateau">
+                                <thead> 
+                                    <tr>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="pions" draggable="true">
+                                <img src="img/p1.png"/>
+                            </div>
+                            <div class="pions" draggable="true">
+                                <img src="img/p2.png"/>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="small-4 columns">
+                        <div class="panel">
+                            <p>Rules</p>
+                        </div>
+                    </div>
+                    <div class="small-4 columns">
+                        <div class="panel">
+                            <p>demo</p>
+                        </div>
+                    </div>
+                    <div class="small-4 columns">
+                        <div class="panel">
+                            <p>history</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h2 id="qunit-banner"></h2>
+                        <div id="qunit-testrunner-toolbar">
+                        </div>
+                        <h2 id="qunit-userAgent"></h2>
+                        <ol id="qunit-tests">
+                        </ol>
+                        <div id="qunit-fixture">
+                            <div id="container"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+        <script>
+            document.write('<script src=' +
+                    ('__proto__' in {} ? 'js/vendor/zepto' : 'js/vendor/jquery') +
+                    '.js><\/script>')
+        </script>
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="js/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="js/foundation.min.js"></script>
+        <!--
+        
+        <script src="js/foundation/foundation.js"></script>
+        
+        <script src="js/foundation/foundation.dropdown.js"></script>
+        
+        <script src="js/foundation/foundation.placeholder.js"></script>
+        
+        <script src="js/foundation/foundation.forms.js"></script>
+        
+        <script src="js/foundation/foundation.alerts.js"></script>
+        
+        <script src="js/foundation/foundation.magellan.js"></script>
+        
+        <script src="js/foundation/foundation.reveal.js"></script>
+        
+        <script src="js/foundation/foundation.tooltips.js"></script>
+        
+        <script src="js/foundation/foundation.clearing.js"></script>
+        
+        <script src="js/foundation/foundation.cookie.js"></script>
+        
+        <script src="js/foundation/foundation.joyride.js"></script>
+        
+        <script src="js/foundation/foundation.orbit.js"></script>
+        
+        <script src="js/foundation/foundation.section.js"></script>
+        
+        <script src="js/foundation/foundation.topbar.js"></script>
+        
+        -->
+        <script type="text/javascript" src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
+
+        <script  type="text/javascript" src="js/jygo.js"></script>
+        <script  type="text/javascript" src="js/jygo.test.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
+        <script>
+            $(document).ready(function() {
+                $( ".pions" ).draggable({ snap: "#plateau tbody tr td" });
+            });
+        </script>
+
+    </body>
+</html>
