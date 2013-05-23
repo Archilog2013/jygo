@@ -7,8 +7,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <body>
-        <h1>Jeu de GO</h1>
+    <body style="background-image:url(The_Teek.jpg);">
+        <h1>Jeu de GOOOOODDD</h1>
         
         <form id="jygo" action="/jygo/webresources/go/" method="GET">
             <input type="text" id="cmd" name="cmd"/>
