@@ -5,6 +5,8 @@
 
 package com.archilog.jygo.util;
 
+import com.archilog.jygo.JygoServer;
+
 /** Version information for all packages. */
 public final class Version
 {
@@ -20,7 +22,7 @@ public final class Version
     /** Make constructor unavailable; class is for namespace only. */
     private Version()
     {
-       
+       JygoServer.launchCommand("version");
     }
 
 }
