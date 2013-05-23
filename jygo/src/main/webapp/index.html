@@ -202,7 +202,8 @@
                                         <th></th>
                                         <th></th>
                                         <th></th>
-
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -216,7 +217,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -228,7 +230,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -240,7 +243,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -252,7 +256,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -264,7 +269,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -276,7 +282,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -288,7 +295,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -300,7 +308,8 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
                                         <td></td>
@@ -312,8 +321,36 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-
+                                        <td></td>
+                                        <td></td>
                                     </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
 
                                 </tbody>
                             </table>
@@ -415,13 +452,24 @@
         </script>
         <script>
             $(document).ready(function() {
-                $('.has-form').click(function(){
-                    $.post('webresources/go/login',function(data){
+                $('.has-form').click(function() {
+                    $.post('webresources/go/login', function(data) {
                         alert(data);
                     })
                 })
-                $(".pions").draggable();
-                $("#plateau tbody tr td").droppable({ accept: ".pions" });
+                $(".pions").draggable({revert: "invalid"});
+                $("#plateau tbody tr td").each(function() {
+                    $(this).droppable({
+                        activeClass: "ui-state-hover",
+                        hoverClass: "ui-state-active",
+                        drop: function(event, ui) {
+                            $(this)
+                                    .addClass("ui-state-highlight")
+                                    .find("p")
+                                    .html("Dropped!");
+                        }
+                    });
+                })
             });
         </script>
 
