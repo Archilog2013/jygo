@@ -15,7 +15,7 @@
         <script src="js/vendor/custom.modernizr.js"></script>
 
     </head>
-    <body style="background-image:url('tib.jpg');">
+    <body >
         <nav class="top-bar" style="">
             <ul class="title-area">
                 <!-- Title Area -->
@@ -416,12 +416,12 @@
         <script>
             $(document).ready(function() {
                 $('.has-form').click(function(){
-                    $.post('jygo/webressources/go/login',function(data){
+                    $.post('jygo/webresources/go/login',function(data){
                         alert(data);
                     })
                 })
                 $(".pions").draggable({ containment: "#plateau",accept: "#plateau tbody tr td" });
-                $("#plateau tbody tr td").dropable({ accept: ".pions" });
+                $("#plateau tbody tr td").droppable({ accept: ".pions" });
             });
         </script>
 
