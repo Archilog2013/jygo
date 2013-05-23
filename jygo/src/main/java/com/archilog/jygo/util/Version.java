@@ -20,5 +20,7 @@ public final class Version
     /** Make constructor unavailable; class is for namespace only. */
     private Version()
     {
+       
     }
+
 }

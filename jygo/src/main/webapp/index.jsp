@@ -6,9 +6,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <script type="JAVASCRIPT">
+            onClipEvent (enterFrame) {
+            if (_xmouse > 250) {
+            this._x+=(_xmouse-250)/30
+            }
+            if (_xmouse < 250) {
+            this._x+=(_xmouse)/30
+            }
+        </script>
     </head>
-    <body>
-        <h1>Jeu de GO</h1>
+    <body style="background-image:url(The_Teek.jpg);">
+        <h1>Jeu de GOOOOODDD</h1>
         
         <form id="jygo" action="/jygo/webresources/go/" method="GET">
             <input type="text" id="cmd" name="cmd"/>
