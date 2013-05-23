@@ -13,8 +13,9 @@ import java.util.logging.Logger;
 public class JygoServer {
     private static Process process;
     private static ProcessBuilder builder;
+    private int idPlayer;
     
-    public JygoServer() {
+    public JygoServer(int idPlayer) {
         // Lancement du serveur avec args
         //ProcessBuilder builder = new ProcessBuilder(StringUtil.splitArguments("gnugo --mode gtp")); // <- linux
         builder = new ProcessBuilder("C:\\gnugo-3.8\\gnugo.exe", "--mode", "gtp");
@@ -25,6 +26,8 @@ public class JygoServer {
         } catch (IOException ex) {
             Logger.getLogger(JygoServer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        this.idPlayer = idPlayer;
     }
     
     public static String launchCommand(String cmd) {
