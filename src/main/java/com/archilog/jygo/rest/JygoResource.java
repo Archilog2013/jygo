@@ -18,11 +18,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.xml.bind.annotation.XmlRootElement;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 
 
 @Stateless
@@ -58,13 +54,22 @@ public class JygoResource {
     
     @POST
     @Path("/launch_game")
-    @Produces(MediaType.TEXT_HTML)
-    public void launchGame(@FormParam("id") int id) {
-        Client player = checkPlayer(id);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String launchGame(final String input) {
+        ObjectMapper mapper = new ObjectMapper();
+        LaunchGameBean launchGame = null;
+        try {
+            launchGame = mapper.readValue(input, LaunchGameBean.class);
+        } catch (IOException ex) {
+            Logger.getLogger(JygoResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Client player = checkPlayer(launchGame.id);
         if (player != null) {
-            JygoServer js = new JygoServer(id);
+            JygoServer js = new JygoServer(launchGame.id);
             players.put(player, js);
         }
+        StringBuilder sb = new StringBuilder();
+        return sb.append("{\"id\": ").append(player.getId()).append("}").toString();
     }
     
     @GET

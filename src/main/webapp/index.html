@@ -42,6 +42,8 @@
             <div class="large-12 columns">
                 <h2>Welcome to JyGo</h2>
                 <p>This is version 0.0.0.1</p>
+                <a id="btn_launch_game" class="button" href="#">Launch game</a>
+                <div id="launched_game">Your game is launched !</div>
                 <hr />
             </div>
         </div>
@@ -451,6 +453,8 @@
             $(document).foundation();
         </script>
         <script>
+            $('#launched_game').hide();
+            var id_Player;
             $(document).ready(function() {
                 $('.has-form').click(function() {
                     var list = {};
@@ -465,7 +469,7 @@
                         data: JSON.stringify(list),
                         success: function (data, textStatus, jqXHR) {
                             if (jqXHR.status === 200) {
-                                console.log(data.id);
+                                id_Player = data.id;
                             }
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
@@ -475,6 +479,24 @@
                         }
                     }); 
                 });
+                
+                $('#btn_launch_game').click(function() {
+                    $.ajax({
+                        type: "POST",
+                        url: "/jygo/webresources/go/launch_game",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: "{\"id\": " + id_Player + "}",
+                        success: function (data, textStatus, jqXHR) {
+                            if (jqXHR.status === 200) {
+                                console.log("Game launched");
+                                $('#btn_launch_game').hide();
+                                $('#launched_game').show();
+                            }
+                        }
+                    }); 
+                });
+                
                 $(".pions").draggable({revert: "invalid"});
                 $("#plateau tbody tr td").each(function() {
                     $(this).droppable({
