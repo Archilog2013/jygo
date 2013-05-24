@@ -27,11 +27,11 @@
 
             <section class="top-bar-section">
                 <!-- Right Nav Section -->
-                <ul class="right">
+                <ul id="login_form" class="right">
                     <li class="divider"></li>
                     <li><input id="login" placeholder="Login"/></li>
                     <li class="divider"></li>
-                    <li><input id="psw" placeholder="Mot de passe"/></li>
+                    <li><input id="password" placeholder="Mot de passe"/></li>
                     <li class="divider"></li>
                     <li class="has-form">
                         <a class="button" href="#">Go</a>
@@ -453,9 +453,20 @@
         <script>
             $(document).ready(function() {
                 $('.has-form').click(function() {
-                    $.post('/jygo/webresources/go/login', function(data) {
-                        alert(data);
+                    var list = {};
+                    $('#login_form input').each(function(){
+                        list[$(this).attr('id')] = ($(this).val());
                     });
+                    $.ajax({
+                        type: "POST",
+                        url: "/jygo/webresources/go/login",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        data: JSON.stringify(list), 
+                        success: function(data){
+                            alert(data);
+                        }
+                    }); 
                 });
                 $(".pions").draggable({revert: "invalid"});
                 $("#plateau tbody tr td").each(function() {
