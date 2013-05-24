@@ -50,8 +50,7 @@ public class JygoResource {
         } catch (IOException ex) {
             Logger.getLogger(JygoResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        System.out.println(login.login);
-        Client player = new Client("");
+        Client player = new Client(login.login);
         players.put(player, null);
         StringBuilder sb = new StringBuilder();
         return sb.append("{'id': ").append(player.getId()).append("}").toString();
