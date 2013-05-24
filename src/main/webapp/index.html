@@ -462,9 +462,16 @@
                         url: "/jygo/webresources/go/login",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
-                        data: JSON.stringify(list), 
-                        success: function(data){
-                            alert(data);
+                        data: JSON.stringify(list),
+                        success: function (data, textStatus, jqXHR) {
+                            if (jqXHR.status === 200) {
+                                console.log(data.id);
+                            }
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(jqXHR);
+                            console.log(textStatus);
+                            console.log(errorThrown);
                         }
                     }); 
                 });
@@ -481,7 +488,14 @@
                         }
                     });
                 });
+                
+                function successAuth(data, textStatus, jqXHR){
+                    console.log(data);
+                    console.log(textStatus);
+                    console.log(jqXHR);
+                }
             });
+            
         </script>
 
     </body>

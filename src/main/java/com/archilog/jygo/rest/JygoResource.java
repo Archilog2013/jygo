@@ -53,7 +53,7 @@ public class JygoResource {
         Client player = new Client(login.login);
         players.put(player, null);
         StringBuilder sb = new StringBuilder();
-        return sb.append("{'id': ").append(player.getId()).append("}").toString();
+        return sb.append("{\"id\": ").append(player.getId()).append("}").toString();
     }
     
     @POST
