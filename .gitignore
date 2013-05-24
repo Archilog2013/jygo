@@ -5,5 +5,8 @@
 *.war
 *.ear
 /bin
+<<<<<<< HEAD
 /jygo/target
+=======
+>>>>>>> bf5a49710091d89ab6cd4c3e8fd7b0ac78308dd1
 /target/
