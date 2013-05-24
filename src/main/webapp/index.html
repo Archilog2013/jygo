@@ -451,8 +451,7 @@
         <script  type="text/javascript" src="js/jygo.test.js"></script>
         <script>
             $(document).foundation();
-        </script>
-        <script>
+            
             $('#launched_game').hide();
             var id_Player;
             $(document).ready(function() {
@@ -489,7 +488,6 @@
                         data: "{\"id\": " + id_Player + "}",
                         success: function (data, textStatus, jqXHR) {
                             if (jqXHR.status === 200) {
-                                console.log("Game launched");
                                 $('#btn_launch_game').hide();
                                 $('#launched_game').show();
                             }
@@ -511,8 +509,6 @@
                     });
                 });
             });
-            
         </script>
-
     </body>
 </html>
