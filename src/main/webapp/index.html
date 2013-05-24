@@ -468,6 +468,26 @@
                         }
                     }); 
                 });
+                
+                $("#plateau tr td").each(function(){
+                    $(this).click(function() {
+                        var y = $(this).closest("td").index();
+                        var x = $(this).closest("tr").index(); 
+                        //alert("x=" + x + "y=" +y );
+                        $(this).append("<img src='img/p2.png' alt='img' />");
+                        $.ajax({
+                            type: "POST",
+                            url: "/jygo/webresources/go/command/?id=1&cmd=play%20white%20h10",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            data: JSON.stringify(list), 
+                            success: function(data){
+                                alert(data);
+                        }
+                    }); 
+                    });
+                });
+                    
                 $(".pions").draggable({revert: "invalid"});
                 $("#plateau tbody tr td").each(function() {
                     $(this).droppable({
