@@ -42,7 +42,7 @@ public class JygoResource {
     
     @POST
     @Path("/launch_game")
-    @Produces("text/html")
+    @Produces(MediaType.TEXT_HTML)
     public void launchGame(@FormParam("id") int id) {
         Client player = checkPlayer(id);
         if (player != null) {
@@ -53,7 +53,7 @@ public class JygoResource {
     
     @GET
     @Path("/command/{cmd}")
-    @Produces("text/html")
+    @Produces(MediaType.TEXT_HTML)
     public String getResponse(@FormParam("id") int id, @PathParam("cmd") String cmd) {
         Client player = checkPlayer(id);
         if (player != null) {
@@ -64,7 +64,7 @@ public class JygoResource {
     
     @GET
     @Path("/players")
-    @Produces("text/html")
+    @Produces(MediaType.TEXT_HTML)
     public String getAllPlayers() {
         Set keys = players.keySet();
         Iterator it = keys.iterator();
