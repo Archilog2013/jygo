@@ -3,6 +3,7 @@ package com.archilog.jygo.rest;
 import com.archilog.jygo.Client;
 import com.archilog.jygo.JygoServer;
 import static com.archilog.jygo.JygoServer.launchCommand;
+import com.archilog.jygo.data.Player;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -24,12 +25,12 @@ import org.codehaus.jackson.map.ObjectMapper;
 @Stateless
 @Path("/go")
 public class JygoResource {
-    private static HashMap<Client, JygoServer>  players = new HashMap<Client, JygoServer>();
+    private static HashMap<Player, JygoServer>  players = new HashMap<Player, JygoServer>();
     
-    public Client checkPlayer(int id) {
-        for (Client c : players.keySet()) {
-            if (id == c.getId())
-                return c;
+    public Player checkPlayer(int id) {
+        for (Player p : players.keySet()) {
+            if (id == p.getId())
+                return p;
         }
         return null;
     }
@@ -46,7 +47,7 @@ public class JygoResource {
         } catch (IOException ex) {
             Logger.getLogger(JygoResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Client player = new Client(login.login);
+        Player player = new Player(login.login);
         players.put(player, null);
         StringBuilder sb = new StringBuilder();
         return sb.append("{\"id\": ").append(player.getId()).append("}").toString();
@@ -63,7 +64,7 @@ public class JygoResource {
         } catch (IOException ex) {
             Logger.getLogger(JygoResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Client player = checkPlayer(launchGame.id);
+        Player player = checkPlayer(launchGame.id);
         if (player != null) {
             JygoServer js = new JygoServer(launchGame.id);
             players.put(player, js);
@@ -76,7 +77,7 @@ public class JygoResource {
     @Path("/command/{cmd}")
     @Produces(MediaType.TEXT_HTML)
     public String getResponse(@FormParam("id") int id, @PathParam("cmd") String cmd) {
-        Client player = checkPlayer(id);
+        Player player = checkPlayer(id);
         if (player != null) {
             return launchCommand(cmd);
         }
@@ -91,8 +92,8 @@ public class JygoResource {
         Iterator it = keys.iterator();
         StringBuilder sb = new StringBuilder();
         while (it.hasNext()) {
-            Client key = (Client)it.next();
-            sb.append("{'pseudo': ").append(key.getPseudo()).append("}");
+            Player key = (Player)it.next();
+            sb.append("{'Tag': ").append(key.getTag()).append("}");
         }
         return sb.toString();
     }
