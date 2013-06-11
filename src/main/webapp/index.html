@@ -246,7 +246,7 @@
                             $(this).click(function() {
 
                                 if ($(this).html() === "" && amoi === true) {
-                                    amoi = false;
+                                   
                                     var y = $(this).closest("td").index();
                                     var x = $(this).closest("tr").index();
 
@@ -275,12 +275,12 @@
                     url: "/jygo/webresources/go/command/",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    data: JSON.stringify({"id": id_Player, "x": x, "y": y,"human":amoi}),
+                    data: JSON.stringify({"id": id_Player, "x": x, "y": y, "human": amoi}),
                     success: function(data) {
-
+                        amoi = false;
                         alert(data);
-
                         amoi = true;
+                        
                     }
                 });
             }
