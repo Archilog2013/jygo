@@ -68,7 +68,7 @@
                     <div id="radio">
                         <input type="radio" id="radio2" name="radio" checked="checked" /><label for="radio2">Je commence</label>
                         <input type="radio" id="radio1" name="radio" /><label for="radio1">L'ordinateur commence</label>
-                        
+
                     </div>
                     <a id="btn_launch_game" class="button" href="#">Launch game</a>
 
@@ -188,6 +188,7 @@
         <script  type="text/javascript" src="js/jygo.js"></script>
         <script  type="text/javascript" src="js/jygo.test.js"></script>
         <script>
+
             function generePlateau(nbr) {
                 for (var i = 0; i < nbr; i++) {
                     $('#plateau tbody').append('<tr></tr>');
@@ -225,6 +226,10 @@
                     }
                 });
             }
+            function placePionXY(x, y, player) {
+
+                $("#plateau tr:eq(" + x + ") td:eq(" + y + ")").append("<img src='img/p" + player + ".png' alt='img' />");
+            }
             function launch() {
 
                 $.ajax({
@@ -247,8 +252,7 @@
                                     amoi = false;
                                     var y = $(this).closest("td").index();
                                     var x = $(this).closest("tr").index();
-                                    //alert("x=" + x + "y=" +y );
-                                    $(this).append("<img src='img/p2.png' alt='img' />");
+
                                     play(x, y);
                                 }
                                 else if (amoi === false)
@@ -266,6 +270,9 @@
                 });
             }
             function play(x, y) {
+                //a mettre dans success
+                placePionXY(x, y, 2);
+                //fin
                 $.ajax({
                     type: "POST",
                     url: "/jygo/webresources/go/command/",
@@ -273,7 +280,9 @@
                     dataType: "json",
                     data: {"id": id_Player, "x": x, "y": y},
                     success: function(data) {
+
                         alert(data);
+
                         amoi = true;
                     }
                 });
@@ -282,13 +291,16 @@
         <script>
 
             $(document).foundation();
-            $( "#radio" ).buttonset();
+            $("#radio").buttonset();
             $('#launched_game').hide();
             var id_Player;
             var nbr = 19;
             var amoi = true;
 
             $(document).ready(function() {
+                $("h2").click(function() {
+                    placePionXY(5, 6, 1);
+                });
                 var select = $("#minbeds");
                 var slider = $("<div id='slider'></div>").insertAfter(select).slider({
                     min: 1,

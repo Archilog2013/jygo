@@ -5,11 +5,21 @@
     Description:
         Purpose of the stylesheet follows.
 */
+.panel{
+    background-color: #E2A76F;
+}
+table#grille{
+    
+    background: none repeat scroll 0 0 black;
+    border: 1px solid #DDDDDD;
+    margin-bottom: 1.25em;
 
+}
 #grille td{ 
     width:50px;
     height:50px;
-    background-color: red;
+    background-color: #9A6C4B;
+    /*background-image: "url(../img/backgrd.jpg)";*/
 }
 #plateau{
     border:none;
@@ -17,7 +27,7 @@
     float:left;
 
     background: none;
-    left: 16px;
+    left: 13px;
 
     top: -3px;
 
