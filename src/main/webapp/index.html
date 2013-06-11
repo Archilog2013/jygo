@@ -69,12 +69,7 @@
 
                                 </tbody>
                             </table>
-                            <div class="pions" draggable="true">
-                                <img src="img/p1.png"/>
-                            </div>
-                            <div class="pions" draggable="true">
-                                <img src="img/p2.png"/>
-                            </div>
+
 
                         </div>
                     </div>
@@ -187,9 +182,10 @@
                     dataType: "json",
                     data: JSON.stringify(param),
                     success: function(data, textStatus, jqXHR) {
-                        if (jqXHR.status === 200) {
+                      
                             id_Player = data.id;
-                        }
+                            $('#login_form').hide();
+                        
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR);
@@ -206,22 +202,45 @@
                     dataType: "json",
                     data: "{\"id\": " + id_Player + "}",
                     success: function(data, textStatus, jqXHR) {
-                        if (jqXHR.status === 200) {
-                            $('#btn_launch_game').hide();
-                            $('#launched_game').show();
-                        }
+
+                        $('#btn_launch_game').hide();
+                        $('#launched_game').show();
+                     
+                        $("#plateau tr td").each(function() {
+                            $(this).click(function() {
+                                
+                                if ($(this).html() === "" && amoi === true) {
+                                    amoi = false;
+                                    var y = $(this).closest("td").index();
+                                    var x = $(this).closest("tr").index();
+                                    //alert("x=" + x + "y=" +y );
+                                    $(this).append("<img src='img/p2.png' alt='img' />");
+                                    play(x, y);
+                                }
+                                else if(amoi ===false)
+                                {
+                                    alert("Ce nest pas à vous de jouer");
+                                }
+                                else
+                                    {
+                                        alert("deja present");
+                                    }
+
+                            });
+                        });
                     }
                 });
             }
             function play(x, y) {
                 $.ajax({
                     type: "POST",
-                    url: "/jygo/webresources/go/command/?id=1&cmd=play%20white%20h10",
+                    url: "/jygo/webresources/go/command/",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    data: {"x": x, "y": y},
+                    data: {"id": id_Player, "x": x, "y": y},
                     success: function(data) {
                         alert(data);
+                        amoi = true;
                     }
                 });
             }
@@ -234,6 +253,7 @@
             var id_Player;
             var nbr = 15;
             var amoi = true;
+
             $(document).ready(function() {
                 generePlateau(nbr);
                 //binding
@@ -250,22 +270,7 @@
                     launch();
                 });
 
-                $("#plateau tr td").each(function() {
-                    $(this).click(function() {
-                        if ($(this).html() === "") {
-                            var y = $(this).closest("td").index();
-                            var x = $(this).closest("tr").index();
-                            //alert("x=" + x + "y=" +y );
-                            $(this).append("<img src='img/p2.png' alt='img' />");
-                            play(x, y);
-                        }
-                        else
-                        {
-                            alert("deja present");
-                        }
 
-                    });
-                });
 
 
             });
