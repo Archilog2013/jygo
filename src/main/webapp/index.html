@@ -42,9 +42,39 @@
             <div class="large-12 columns">
                 <h2>Welcome to JyGo</h2>
                 <p>This is version 0.0.0.1</p>
-                <a id="btn_launch_game" class="button" href="#">Launch game</a>
+                <div id="options" style="display:none;">
+                    <label for="minbeds">Nombre de cases : </label>
+                    <select name="minbeds" id="minbeds" disabled="disabled">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option selected="selected">10</option>
+                        <option>11</option>
+                        <option>12</option>
+                        <option>13</option>
+                        <option>14</option>
+                        <option>15</option>
+                        <option>16</option>
+                        <option>17</option>
+                        <option>18</option>
+                        <option>19</option>
+                    </select>
+                    <div id="radio">
+                        <input type="radio" id="radio2" name="radio" checked="checked" /><label for="radio2">Je commence</label>
+                        <input type="radio" id="radio1" name="radio" /><label for="radio1">L'ordinateur commence</label>
+                        
+                    </div>
+                    <a id="btn_launch_game" class="button" href="#">Launch game</a>
+
+                    <hr />
+                </div>
                 <div id="launched_game">Your game is launched !</div>
-                <hr />
             </div>
         </div>
 
@@ -182,10 +212,11 @@
                     dataType: "json",
                     data: JSON.stringify(param),
                     success: function(data, textStatus, jqXHR) {
-                      
-                            id_Player = data.id;
-                            $('#login_form').hide();
-                        
+
+                        id_Player = data.id;
+                        $('#login_form').hide();
+                        $("#options").show();
+
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
                         console.log(jqXHR);
@@ -195,6 +226,7 @@
                 });
             }
             function launch() {
+
                 $.ajax({
                     type: "POST",
                     url: "/jygo/webresources/go/launch_game",
@@ -202,13 +234,15 @@
                     dataType: "json",
                     data: "{\"id\": " + id_Player + "}",
                     success: function(data, textStatus, jqXHR) {
+                        generePlateau(parseInt($("#minbeds option:selected").html()));
 
                         $('#btn_launch_game').hide();
+                        $("#options").hide();
                         $('#launched_game').show();
-                     
+
                         $("#plateau tr td").each(function() {
                             $(this).click(function() {
-                                
+
                                 if ($(this).html() === "" && amoi === true) {
                                     amoi = false;
                                     var y = $(this).closest("td").index();
@@ -217,14 +251,14 @@
                                     $(this).append("<img src='img/p2.png' alt='img' />");
                                     play(x, y);
                                 }
-                                else if(amoi ===false)
+                                else if (amoi === false)
                                 {
                                     alert("Ce nest pas à vous de jouer");
                                 }
                                 else
-                                    {
-                                        alert("deja present");
-                                    }
+                                {
+                                    alert("deja present");
+                                }
 
                             });
                         });
@@ -248,14 +282,27 @@
         <script>
 
             $(document).foundation();
-
+            $( "#radio" ).buttonset();
             $('#launched_game').hide();
             var id_Player;
-            var nbr = 15;
+            var nbr = 19;
             var amoi = true;
 
             $(document).ready(function() {
-                generePlateau(nbr);
+                var select = $("#minbeds");
+                var slider = $("<div id='slider'></div>").insertAfter(select).slider({
+                    min: 1,
+                    max: 19,
+                    range: "min",
+                    value: select[ 0 ].selectedIndex + 1,
+                    slide: function(event, ui) {
+                        select[ 0 ].selectedIndex = ui.value - 1;
+                    }
+                });
+                $("#minbeds").change(function() {
+                    slider.slider("value", this.selectedIndex + 1);
+                });
+
                 //binding
                 $('.has-form').click(function() {
 
