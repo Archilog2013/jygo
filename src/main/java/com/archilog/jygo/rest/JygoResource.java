@@ -92,13 +92,16 @@ public class JygoResource {
         try {
             jObj = new JSONObject(input);
             Boolean amoi = Boolean.valueOf(jObj.get("human").toString());
+            System.out.println(amoi);
             Player player = checkPlayer(Integer.valueOf(jObj.get("id").toString()));
             if (player != null) {
-                String command = players.get(player).launchCommand("3 genmove white");
+                String command;
+                if (amoi == Boolean.TRUE) {
+                    command = players.get(player).launchCommand("4 play black E5");
+                } else {
+                    command = players.get(player).launchCommand("3 genmove white");
+                }
                 System.out.println(command);
-                System.out.println("-----");
-                String command2 = players.get(player).launchCommand("4 play black E5");
-                System.out.println(command2);
                 return command;
             }
         } catch (JSONException ex) {
