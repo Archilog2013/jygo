@@ -22,7 +22,7 @@ public final class Version
     /** Make constructor unavailable; class is for namespace only. */
     private Version()
     {
-       JygoServer.launchCommand("version");
+       //JygoServer.launchCommand("version");
     }
 
 }
