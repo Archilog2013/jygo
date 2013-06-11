@@ -1,8 +1,6 @@
 package com.archilog.jygo.rest;
 
-import com.archilog.jygo.Client;
 import com.archilog.jygo.JygoServer;
-import static com.archilog.jygo.JygoServer.launchCommand;
 import com.archilog.jygo.data.Player;
 import java.io.IOException;
 import java.util.HashMap;
@@ -12,14 +10,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 
 @Stateless
@@ -57,6 +55,15 @@ public class JygoResource {
     @Path("/launch_game")
     @Consumes(MediaType.APPLICATION_JSON)
     public String launchGame(final String input) {
+        JSONObject jObj;
+        int cases = 10;
+        try {
+            jObj = new JSONObject(input);
+            cases = Integer.valueOf(jObj.get("cases").toString());
+        } catch (JSONException ex) {
+            Logger.getLogger(JygoResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         ObjectMapper mapper = new ObjectMapper();
         LaunchGameBean launchGame = null;
         try {
@@ -68,19 +75,39 @@ public class JygoResource {
         if (player != null) {
             JygoServer js = new JygoServer(launchGame.id);
             players.put(player, js);
+            String test = players.get(player).launchCommand("1 boardsize " + cases);
+            System.out.println(test);
+            String test2 = players.get(player).launchCommand("2 clear_board");
+            System.out.println(test2);
         }
         StringBuilder sb = new StringBuilder();
         return sb.append("{\"id\": ").append(player.getId()).append("}").toString();
     }
     
-    @GET
-    @Path("/command/{cmd}")
+    @POST
+    @Path("/command")
     @Produces(MediaType.TEXT_HTML)
-    public String getResponse(@FormParam("id") int id, @PathParam("cmd") String cmd) {
-        Player player = checkPlayer(id);
+    public String getResponse(final String input) {
+        JSONObject jObj;
+        try {
+            jObj = new JSONObject(input);
+            Player player = checkPlayer(Integer.valueOf(jObj.get("id").toString()));
+            if (player != null) {
+                String command = players.get(player).launchCommand("3 genmove white");
+                System.out.println(command);
+                System.out.println("-----");
+                String command2 = players.get(player).launchCommand("4 play black E5");
+                System.out.println(command2);
+                return command;
+            }
+        } catch (JSONException ex) {
+            Logger.getLogger(JygoResource.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        /*Player player = checkPlayer(id);
         if (player != null) {
             return launchCommand(cmd);
-        }
+        }*/
         return "NON.";
     }
     

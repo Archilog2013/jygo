@@ -18,11 +18,10 @@ public class JygoServer {
     public JygoServer(int idPlayer) {
         // Lancement du serveur avec args
         //ProcessBuilder builder = new ProcessBuilder(StringUtil.splitArguments("gnugo --mode gtp")); // <- linux
-        if(System.getProperty("os.name") == "Linux")
-        {
+        if ("Linux".equals(System.getProperty("os.name"))) {
             builder = new ProcessBuilder("gnugo", "--mode", "gtp");
             builder.redirectErrorStream(true);    
-        }else{
+        } else {
             builder = new ProcessBuilder("C:\\gnugo-3.8\\gnugo.exe", "--mode", "gtp");
             builder.redirectErrorStream(true);    
         }
@@ -37,7 +36,7 @@ public class JygoServer {
         this.idPlayer = idPlayer;
     }
     
-    public static String launchCommand(String cmd) {
+    public String launchCommand(String cmd) {
         String line = "";
         StringBuilder sb = new StringBuilder();
 
