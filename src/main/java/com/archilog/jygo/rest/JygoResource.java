@@ -91,6 +91,7 @@ public class JygoResource {
         JSONObject jObj;
         try {
             jObj = new JSONObject(input);
+            Boolean amoi = Boolean.valueOf(jObj.get("human").toString());
             Player player = checkPlayer(Integer.valueOf(jObj.get("id").toString()));
             if (player != null) {
                 String command = players.get(player).launchCommand("3 genmove white");
