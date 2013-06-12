@@ -23,14 +23,20 @@ import org.codehaus.jettison.json.JSONObject;
 @Stateless
 @Path("/go")
 public class JygoResource {
-    private static HashMap<Player, JygoServer>  players = new HashMap<Player, JygoServer>();
+    private static HashMap<Player, JygoServer> players = new HashMap<Player, JygoServer>();
     
     public Player checkPlayer(int id) {
+        Player thePlayer = new Player();
         for (Player p : players.keySet()) {
-            if (id == p.getId())
-                return p;
+            if (id == p.getId()) {
+                thePlayer = p;
+            }
         }
-        return null;
+        return thePlayer;
+    }
+    
+    private String getCharForNumber(int i) {
+        return i > 0 && i < 27 ? String.valueOf((char)(i + 64)) : null;
     }
     
     @POST
@@ -75,10 +81,10 @@ public class JygoResource {
         if (player != null) {
             JygoServer js = new JygoServer(launchGame.id);
             players.put(player, js);
-            String test = players.get(player).launchCommand("1 boardsize " + cases);
-            System.out.println(test);
-            String test2 = players.get(player).launchCommand("2 clear_board");
-            System.out.println(test2);
+            String test = players.get(player).launchCommand(js.getIncrement() + " boardsize " + cases);
+            js.setIncrement(js.getIncrement() + 1);
+            String test2 = players.get(player).launchCommand(js.getIncrement() + " clear_board");
+            js.setIncrement(js.getIncrement() + 1);
         }
         StringBuilder sb = new StringBuilder();
         return sb.append("{\"id\": ").append(player.getId()).append("}").toString();
@@ -92,26 +98,27 @@ public class JygoResource {
         try {
             jObj = new JSONObject(input);
             Boolean amoi = Boolean.valueOf(jObj.get("human").toString());
-            System.out.println(amoi);
             Player player = checkPlayer(Integer.valueOf(jObj.get("id").toString()));
             if (player != null) {
                 String command;
+                System.out.println(amoi);
                 if (amoi == Boolean.TRUE) {
-                    command = players.get(player).launchCommand("4 play black E5");
+                    int x = Integer.valueOf(jObj.get("x").toString()) + 1;
+                    int y = Integer.valueOf(jObj.get("y").toString()) + 1;
+                    if (x >= 9) x++;
+                    String coord = getCharForNumber(x) + y;
+                    System.out.println(coord);
+                    command = players.get(player).launchCommand(players.get(player).getIncrement() + " play black " + coord);
                 } else {
-                    command = players.get(player).launchCommand("3 genmove white");
+                    command = players.get(player).launchCommand(players.get(player).getIncrement() + " genmove white");
                 }
+                players.get(player).setIncrement(players.get(player).getIncrement() + 1);
                 System.out.println(command);
                 return command;
             }
         } catch (JSONException ex) {
             Logger.getLogger(JygoResource.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        /*Player player = checkPlayer(id);
-        if (player != null) {
-            return launchCommand(cmd);
-        }*/
         return "NON.";
     }
     

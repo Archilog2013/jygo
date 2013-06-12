@@ -14,6 +14,15 @@ public class JygoServer {
     private static Process process;
     private static ProcessBuilder builder;
     private int idPlayer;
+    private int increment;
+
+    public int getIncrement() {
+        return increment;
+    }
+
+    public void setIncrement(int increment) {
+        this.increment = increment;
+    }
     
     public JygoServer(int idPlayer) {
         // Lancement du serveur avec args
@@ -34,6 +43,7 @@ public class JygoServer {
         }
         
         this.idPlayer = idPlayer;
+        this.increment = 1;
     }
     
     public String launchCommand(String cmd) {

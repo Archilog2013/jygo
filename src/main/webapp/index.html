@@ -250,7 +250,8 @@
                                     var y = $(this).closest("td").index();
                                     var x = $(this).closest("tr").index();
 
-                                    play(x, y);
+                                    play(x, y, 1);
+                                    //play(0, 0, 2);
                                 }
                                 else if (amoi === false)
                                 {
@@ -266,10 +267,8 @@
                     }
                 });
             }
-            function play(x, y) {
-                //a mettre dans success
-                placePionXY(x, y, 2);
-                //fin
+            function play(x, y, id_Player) {
+                amoi = false;
                 $.ajax({
                     type: "POST",
                     url: "/jygo/webresources/go/command/",
@@ -277,10 +276,19 @@
                     dataType: "json",
                     data: JSON.stringify({"id": id_Player, "x": x, "y": y, "human": amoi}),
                     success: function(data) {
-                        amoi = false;
-                        alert(data);
-                        amoi = true;
-                        
+                        console.log(data);
+                        if (id_Player === 2) {
+                            console.log(data);
+                            amoi = true;
+                        } else {
+                            amoi = false;
+                        }
+                        placePionXY(x, y, id_Player);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.log(jqXHR);
+                        console.log(textStatus);
+                        console.log(errorThrown);
                     }
                 });
             }
